@@ -14,8 +14,11 @@
 
   <header>
     <div class="logo">Cyrca</div>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
     <nav>
-      <ul>
+      <ul id="navMenu">
         <li><a href="index.html">Home</a></li>
         <li><a href="servicios.html">Services</a></li>
         <li><a href="sobre-nosotros.html">About Us</a></li>
@@ -51,21 +54,25 @@
 
     <section class="contact-form">
       <h2>Send Us a Message</h2>
-      <form>
+      <form novalidate>
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name">
+        <span class="field-error"></span>
 
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email">
+        <span class="field-error"></span>
 
         <label for="phone">Phone</label>
         <input type="tel" id="phone" name="phone">
 
         <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+        <textarea id="message" name="message" rows="5"></textarea>
+        <span class="field-error"></span>
 
         <button type="submit">Send Message</button>
       </form>
+      <p class="form-feedback"></p>
       <p class="note">Note: this form isn't connected yet — that's coming in a later phase.</p>
     </section>
 
@@ -81,5 +88,6 @@
     <p>&copy; 2026 Cyrca. All rights reserved.</p>
   </footer>
 
+  <script src="js/main.js"></script>
 </body>
 </html>
