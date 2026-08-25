@@ -27,6 +27,21 @@ function getNextInvoiceNumber() {
   return `INV-${String(next).padStart(4, '0')}`;
 }
 
+// Guarda un registro de la factura en Formspree, para tener un listado de clientes.
+// Es un envio "de fondo": si falla (por ejemplo, sin internet), la factura
+// igual se genera y se puede imprimir con normalidad.
+const INVOICE_LOG_URL = 'https://formspree.io/f/xqpzvgqg';
+
+function logInvoiceRecord(record) {
+  fetch(INVOICE_LOG_URL, {
+    method: 'POST',
+    body: JSON.stringify(record),
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+  }).catch((error) => {
+    console.warn('Could not save invoice record:', error);
+  });
+}
+
 if (generateInvoiceBtn) {
   generateInvoiceBtn.addEventListener('click', async () => {
     await pricingReady; // asegura que usemos los precios reales de la planilla, si ya llegaron
@@ -57,8 +72,9 @@ if (generateInvoiceBtn) {
 
     const total = calculatePrice(size, difficulty);
     const description = `Regular House Cleaning — ${SIZE_LABELS[size]}, ${DIFFICULTY_LABELS[difficulty]}`;
+    const invoiceNumber = getNextInvoiceNumber();
 
-    document.querySelector('#invoiceNumber').textContent = getNextInvoiceNumber();
+    document.querySelector('#invoiceNumber').textContent = invoiceNumber;
     document.querySelector('#invoiceDate').textContent = serviceDateField.value;
     document.querySelector('#invoiceClientName').textContent = clientNameField.value.trim();
     document.querySelector('#invoiceServiceDesc').textContent = description;
@@ -68,6 +84,15 @@ if (generateInvoiceBtn) {
 
     invoicePreview.classList.remove('hidden');
     invoicePreview.scrollIntoView({ behavior: 'smooth' });
+
+    logInvoiceRecord({
+      invoiceNumber,
+      clientName: clientNameField.value.trim(),
+      serviceDate: serviceDateField.value,
+      service: description,
+      total: `$${total}`,
+      notes,
+    });
   });
 }
 
