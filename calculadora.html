@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="img/logo-icon.png" type="image/png">
-  <link rel="stylesheet" href="css/style.css?v=18">
+  <link rel="stylesheet" href="css/style.css?v=19">
 </head>
 <body>
 
@@ -39,19 +39,31 @@
     </section>
 
     <section class="calculator-box">
-      <label for="size">Home Size</label>
-      <select id="size">
-        <option value="small">Small (1-2 bedrooms)</option>
-        <option value="medium">Medium (3-4 bedrooms)</option>
-        <option value="large">Large (5+ bedrooms)</option>
-      </select>
+      <h2>Residential Cleaning</h2>
 
-      <label for="difficulty">Cleaning Difficulty</label>
-      <select id="difficulty">
-        <option value="light">Light (regular maintenance)</option>
-        <option value="standard">Standard</option>
-        <option value="deep">Deep Clean</option>
-      </select>
+      <p class="calc-label">Home Size</p>
+      <div class="option-group">
+        <input type="radio" id="size-small" name="size" value="small" checked>
+        <label for="size-small">Small<span>1-2 bedrooms</span></label>
+
+        <input type="radio" id="size-medium" name="size" value="medium">
+        <label for="size-medium">Medium<span>3-4 bedrooms</span></label>
+
+        <input type="radio" id="size-large" name="size" value="large">
+        <label for="size-large">Large<span>5+ bedrooms</span></label>
+      </div>
+
+      <p class="calc-label">Cleaning Difficulty</p>
+      <div class="option-group">
+        <input type="radio" id="diff-light" name="difficulty" value="light" checked>
+        <label for="diff-light">Light<span>Maintenance</span></label>
+
+        <input type="radio" id="diff-standard" name="difficulty" value="standard">
+        <label for="diff-standard">Standard<span>Regular clean</span></label>
+
+        <input type="radio" id="diff-deep" name="difficulty" value="deep">
+        <label for="diff-deep">Deep Clean<span>First-time / heavy</span></label>
+      </div>
 
       <div class="price-result">
         <span class="price-label">Estimated Price</span>
@@ -61,6 +73,27 @@
       <p class="note">This is an estimate based on typical jobs. Final pricing may vary depending on your home's specific condition — contact us to confirm.</p>
 
       <a href="contacto.html" class="button" id="requestQuoteBtn">Request This Quote</a>
+    </section>
+
+    <section class="other-estimates">
+      <h2>Other Services</h2>
+      <p class="note">These are quoted individually — here's a starting point.</p>
+      <div class="other-estimates-grid">
+        <div class="estimate-card">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>
+          <h3>Office &amp; Commercial</h3>
+          <p>Starting at <strong id="officePriceDisplay2">$150</strong> per visit</p>
+          <p class="note">Final pricing depends on the size of your space.</p>
+          <a href="contacto.html" class="button-outline-blue">Get a Custom Quote</a>
+        </div>
+        <div class="estimate-card">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+          <h3>Move In / Move Out</h3>
+          <p>Starting at <strong id="moveOutPriceDisplay2">$220</strong></p>
+          <p class="note">Final pricing depends on the size of the home.</p>
+          <a href="contacto.html" class="button-outline-blue">Get a Custom Quote</a>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -77,8 +110,8 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=18"></script>
-  <script src="js/pricing.js?v=18"></script>
-  <script src="js/calculadora.js?v=18"></script>
+  <script src="js/main.js?v=19"></script>
+  <script src="js/pricing.js?v=19"></script>
+  <script src="js/calculadora.js?v=19"></script>
 </body>
 </html>
