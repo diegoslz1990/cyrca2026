@@ -6,7 +6,7 @@
 // numeros de ejemplo.
 
 const FALLBACK_PRICING = {
-  small: 90, // 1-2 dormitorios
+  small: 75, // 1-2 dormitorios
   medium: 130, // 3-4 dormitorios
   large: 180, // 5+ dormitorios
   light: 1, // limpieza de mantenimiento
