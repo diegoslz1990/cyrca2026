@@ -162,6 +162,27 @@ section {
   margin: 0 auto;
 }
 
+.lang-note,
+.page-header p.lang-note {
+  display: inline-block;
+  color: var(--color-blue);
+  font-weight: 600;
+  font-size: 0.95rem;
+  background-color: var(--color-bg);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  margin: 0.5rem auto 0;
+  max-width: none;
+}
+
+.hero p.lang-note-hero {
+  color: var(--color-white);
+  background-color: rgba(255, 255, 255, 0.15);
+  font-size: 0.9rem;
+  max-width: none;
+  opacity: 1;
+}
+
 /* ===== Hero (portada) ===== */
 .hero {
   background: linear-gradient(135deg, var(--color-blue), var(--color-blue-dark));
