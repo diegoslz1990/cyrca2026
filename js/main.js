@@ -67,8 +67,32 @@ if (contactForm) {
       return;
     }
 
-    feedback.textContent = `Thanks, ${name.value.trim()}! We'll get back to you soon. (This form isn't sending real messages yet.)`;
-    feedback.className = 'form-feedback success';
-    contactForm.reset();
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+
+    fetch(contactForm.action, {
+      method: 'POST',
+      body: new FormData(contactForm),
+      headers: { Accept: 'application/json' },
+    })
+      .then((response) => {
+        if (response.ok) {
+          feedback.textContent = `Thanks, ${name.value.trim()}! We'll get back to you soon.`;
+          feedback.className = 'form-feedback success';
+          contactForm.reset();
+        } else {
+          feedback.textContent = 'Something went wrong sending your message. Please try again or contact us directly.';
+          feedback.className = 'form-feedback';
+        }
+      })
+      .catch(() => {
+        feedback.textContent = 'Something went wrong sending your message. Please check your connection and try again.';
+        feedback.className = 'form-feedback';
+      })
+      .finally(() => {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send Message';
+      });
   });
 }
