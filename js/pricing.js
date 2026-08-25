@@ -1,9 +1,9 @@
 // ===== Configuracion de precios de Cyrca =====
-// Los precios reales se cargan desde una Google Sheet publicada, para que
-// se puedan editar sin tocar codigo (solo hay que cambiar un numero en la
-// planilla). Estos valores de aca abajo son el "respaldo": si por algun
-// motivo la planilla no carga (sin internet, no esta publicada todavia,
-// etc.), el sitio sigue funcionando con estos numeros de ejemplo.
+// Los precios reales se cargan desde data/precios.txt, un archivo de texto
+// simple que se puede editar directamente en GitHub (como un bloc de notas,
+// sin tocar codigo). Estos valores de aca abajo son el "respaldo": si por
+// algun motivo ese archivo no carga, el sitio sigue funcionando con estos
+// numeros de ejemplo.
 
 const FALLBACK_PRICING = {
   small: 90, // 1-2 dormitorios
@@ -16,21 +16,22 @@ const FALLBACK_PRICING = {
 
 const PRICING_CONFIG = { ...FALLBACK_PRICING };
 
-// TODO: reemplazar por la URL real una vez publicada la Google Sheet
-// (Archivo > Compartir > Publicar en la Web > formato CSV)
-const PRICING_SHEET_URL = 'PASTE_PUBLISHED_SHEET_CSV_URL_HERE';
+const PRICING_FILE_URL = 'data/precios.txt';
 
-const pricingReady = fetch(PRICING_SHEET_URL)
+const pricingReady = fetch(PRICING_FILE_URL)
   .then((response) => {
     if (!response.ok) {
-      throw new Error('Pricing sheet did not respond OK');
+      throw new Error('Pricing file did not respond OK');
     }
     return response.text();
   })
-  .then((csvText) => {
-    const rows = csvText.trim().split('\n').slice(1); // saltar encabezado
-    rows.forEach((row) => {
-      const [key, value] = row.split(',').map((cell) => cell.trim());
+  .then((text) => {
+    text.split('\n').forEach((line) => {
+      const trimmed = line.trim();
+      if (trimmed === '' || trimmed.startsWith('#')) {
+        return; // ignorar lineas vacias y comentarios
+      }
+      const [key, value] = trimmed.split('=').map((part) => part.trim());
       if (key && value !== undefined && !Number.isNaN(parseFloat(value))) {
         PRICING_CONFIG[key] = parseFloat(value);
       }
