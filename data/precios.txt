@@ -2,7 +2,7 @@
 # Para cambiar un precio, edita el numero despues del signo = y guarda.
 # No borres los nombres (small, medium, large, light, standard, deep).
 
-small=90
+small=75
 medium=130
 large=180
 light=1
