@@ -1,11 +1,11 @@
 /* ===== Variables de marca ===== */
 :root {
-  --color-blue: #1d6fa5;
-  --color-blue-dark: #14507a;
-  --color-green: #3fa34d;
-  --color-green-dark: #2e7d38;
-  --color-yellow: #ffc93c;
-  --color-yellow-dark: #e6ac00;
+  --color-blue: #0d47c7;
+  --color-blue-dark: #082f8a;
+  --color-green: #47ae2e;
+  --color-green-dark: #338021;
+  --color-yellow: #fdd835;
+  --color-yellow-dark: #e0bd00;
   --color-white: #ffffff;
   --color-bg: #f7f9fa;
   --color-text: #22303c;
@@ -85,10 +85,19 @@ header {
 }
 
 .logo {
-  font-family: var(--font-heading);
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--color-blue);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  height: 34px;
+  width: auto;
+}
+
+.logo-wordmark {
+  height: 20px;
+  width: auto;
 }
 
 nav ul {
