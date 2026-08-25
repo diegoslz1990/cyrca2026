@@ -16,6 +16,18 @@ const FALLBACK_PRICING = {
 
 const PRICING_CONFIG = { ...FALLBACK_PRICING };
 
+const SIZE_LABELS = {
+  small: 'Small Home',
+  medium: 'Medium Home',
+  large: 'Large Home',
+};
+
+const DIFFICULTY_LABELS = {
+  light: 'Light Maintenance',
+  standard: 'Standard Clean',
+  deep: 'Deep Clean',
+};
+
 const PRICING_FILE_URL = 'data/precios.txt';
 
 const pricingReady = fetch(PRICING_FILE_URL)

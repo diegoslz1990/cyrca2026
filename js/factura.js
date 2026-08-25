@@ -1,15 +1,3 @@
-const SIZE_LABELS = {
-  small: 'Small Home',
-  medium: 'Medium Home',
-  large: 'Large Home',
-};
-
-const DIFFICULTY_LABELS = {
-  light: 'Light Maintenance',
-  standard: 'Standard Clean',
-  deep: 'Deep Clean',
-};
-
 const generateInvoiceBtn = document.querySelector('#generateInvoiceBtn');
 const printInvoiceBtn = document.querySelector('#printInvoiceBtn');
 const invoicePreview = document.querySelector('#invoicePreview');

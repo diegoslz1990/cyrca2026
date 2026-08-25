@@ -33,6 +33,23 @@ function clearError(field) {
   field.classList.remove('invalid');
 }
 
+// Si llegamos desde "Request This Quote" en la calculadora, precompletamos
+// el mensaje con el estimado que vio el cliente (size, difficulty y price
+// vienen en la URL, ej: contacto.html?size=medium&difficulty=deep&price=208)
+if (contactForm) {
+  const quoteParams = new URLSearchParams(window.location.search);
+  const quoteSize = quoteParams.get('size');
+  const quoteDifficulty = quoteParams.get('difficulty');
+  const quotePrice = quoteParams.get('price');
+  const messageField = contactForm.querySelector('#message');
+
+  if (quoteSize && quoteDifficulty && quotePrice && messageField && typeof SIZE_LABELS !== 'undefined') {
+    const sizeLabel = SIZE_LABELS[quoteSize] || quoteSize;
+    const difficultyLabel = DIFFICULTY_LABELS[quoteDifficulty] || quoteDifficulty;
+    messageField.value = `I'm interested in a quote for: ${sizeLabel}, ${difficultyLabel} — Estimated $${quotePrice}`;
+  }
+}
+
 if (contactForm) {
   contactForm.addEventListener('submit', (event) => {
     event.preventDefault();
