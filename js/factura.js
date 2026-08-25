@@ -28,7 +28,9 @@ function getNextInvoiceNumber() {
 }
 
 if (generateInvoiceBtn) {
-  generateInvoiceBtn.addEventListener('click', () => {
+  generateInvoiceBtn.addEventListener('click', async () => {
+    await pricingReady; // asegura que usemos los precios reales de la planilla, si ya llegaron
+
     const clientNameField = document.querySelector('#clientName');
     const serviceDateField = document.querySelector('#serviceDate');
     const size = document.querySelector('#invoiceSize').value;

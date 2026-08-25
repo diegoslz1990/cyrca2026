@@ -10,5 +10,6 @@ function updatePrice() {
 if (sizeSelect && difficultySelect && priceValue) {
   sizeSelect.addEventListener('change', updatePrice);
   difficultySelect.addEventListener('change', updatePrice);
-  updatePrice();
+  updatePrice(); // con precios de respaldo, para que se vea algo de entrada
+  pricingReady.then(updatePrice); // recalcula con los precios reales de la planilla cuando lleguen
 }
