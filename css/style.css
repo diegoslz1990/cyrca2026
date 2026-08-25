@@ -177,7 +177,8 @@ section {
 .service-area,
 .story,
 .values,
-.contact-form {
+.contact-form,
+.calculator-box {
   background-color: var(--color-white);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -322,6 +323,56 @@ section {
 
 .form-feedback.success {
   color: var(--color-green-dark);
+}
+
+/* ===== Calculadora de precios ===== */
+.calculator-box label {
+  display: block;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.calculator-box select {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #d3dbe0;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background-color: var(--color-white);
+}
+
+.price-result {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.price-label {
+  display: block;
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+}
+
+.price-value {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-blue);
+}
+
+.calculator-box .note {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.calculator-box .button {
+  margin-top: 1.5rem;
 }
 
 /* ===== Footer ===== */

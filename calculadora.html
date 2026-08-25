@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Price Estimate | Cyrca House Cleaning</title>
+  <meta name="description" content="Get an instant price estimate for house cleaning in Florence, Kentucky based on your home size and cleaning needs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">Cyrca</div>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="servicios.html">Services</a></li>
+        <li><a href="calculadora.html">Get an Estimate</a></li>
+        <li><a href="sobre-nosotros.html">About Us</a></li>
+        <li><a href="contacto.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <h1>Get a Price Estimate</h1>
+      <p>Choose your home size and the level of cleaning you need to see an estimated price.</p>
+    </section>
+
+    <section class="calculator-box">
+      <label for="size">Home Size</label>
+      <select id="size">
+        <option value="small">Small (1-2 bedrooms)</option>
+        <option value="medium">Medium (3-4 bedrooms)</option>
+        <option value="large">Large (5+ bedrooms)</option>
+      </select>
+
+      <label for="difficulty">Cleaning Difficulty</label>
+      <select id="difficulty">
+        <option value="light">Light (regular maintenance)</option>
+        <option value="standard">Standard</option>
+        <option value="deep">Deep Clean</option>
+      </select>
+
+      <div class="price-result">
+        <span class="price-label">Estimated Price</span>
+        <span class="price-value" id="priceValue">$0</span>
+      </div>
+
+      <p class="note">This is an estimate based on typical jobs. Final pricing may vary depending on your home's specific condition — contact us to confirm.</p>
+
+      <a href="contacto.html" class="button">Request This Quote</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Cyrca — House Cleaning Services</p>
+    <p>Florence, Kentucky and surrounding areas</p>
+    <p>&copy; 2026 Cyrca. All rights reserved.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/pricing.js"></script>
+  <script src="js/calculadora.js"></script>
+</body>
+</html>
