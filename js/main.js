@@ -22,13 +22,13 @@ document.querySelectorAll('nav a').forEach((link) => {
 const contactForm = document.querySelector('.contact-form form');
 
 function showError(field, message) {
-  const errorEl = field.parentElement.querySelector('.field-error');
+  const errorEl = document.getElementById(`${field.id}-error`);
   errorEl.textContent = message;
   field.classList.add('invalid');
 }
 
 function clearError(field) {
-  const errorEl = field.parentElement.querySelector('.field-error');
+  const errorEl = document.getElementById(`${field.id}-error`);
   errorEl.textContent = '';
   field.classList.remove('invalid');
 }

@@ -178,11 +178,17 @@ section {
 .story,
 .values,
 .contact-form,
-.calculator-box {
+.calculator-box,
+.invoice-form,
+.invoice-preview {
   background-color: var(--color-white);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 2rem;
+}
+
+.hidden {
+  display: none;
 }
 
 .services-preview,
@@ -373,6 +379,109 @@ section {
 
 .calculator-box .button {
   margin-top: 1.5rem;
+}
+
+/* ===== Formulario de factura ===== */
+.invoice-form label {
+  display: block;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.invoice-form input,
+.invoice-form select,
+.invoice-form textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #d3dbe0;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background-color: var(--color-white);
+}
+
+.invoice-form input.invalid,
+.invoice-form select.invalid {
+  border-color: #c0392b;
+}
+
+.invoice-form .button {
+  margin-top: 1.5rem;
+}
+
+/* ===== Vista previa de la factura ===== */
+.invoice-preview {
+  margin-top: 2rem;
+}
+
+.invoice-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-bg);
+}
+
+.invoice-meta {
+  text-align: right;
+}
+
+.invoice-bill-to {
+  margin-bottom: 1.5rem;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.invoice-table th,
+.invoice-table td {
+  text-align: left;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--color-bg);
+}
+
+.invoice-table th:last-child,
+.invoice-table td:last-child {
+  text-align: right;
+}
+
+.invoice-table .invoice-total td {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--color-blue);
+  border-bottom: none;
+}
+
+.invoice-notes {
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+.invoice-thanks {
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+/* ===== Estilos solo para cuando se imprime ===== */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background-color: var(--color-white);
+  }
+
+  .invoice-preview {
+    box-shadow: none;
+    padding: 0;
+  }
 }
 
 /* ===== Footer ===== */
