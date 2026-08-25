@@ -12,6 +12,8 @@ const FALLBACK_PRICING = {
   light: 1, // limpieza de mantenimiento
   standard: 1.25, // limpieza estandar
   deep: 1.6, // limpieza profunda / primera vez
+  office_starting: 150, // precio de arranque, oficinas (temporal)
+  moveinout_starting: 220, // precio de arranque, move in/out (temporal)
 };
 
 const PRICING_CONFIG = { ...FALLBACK_PRICING };

@@ -1,6 +1,7 @@
 # Precios de Cyrca
 # Para cambiar un precio, edita el numero despues del signo = y guarda.
-# No borres los nombres (small, medium, large, light, standard, deep).
+# No borres los nombres (small, medium, large, light, standard, deep,
+# office_starting, moveinout_starting).
 
 small=90
 medium=130
@@ -8,3 +9,7 @@ large=180
 light=1
 standard=1.25
 deep=1.6
+
+# Precios "a partir de" para Office y Move In/Out (TEMPORALES - editar con precios reales)
+office_starting=150
+moveinout_starting=220
