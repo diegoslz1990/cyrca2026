@@ -776,6 +776,19 @@ footer p {
   text-decoration: none;
 }
 
+.staff-login-link {
+  display: inline-block;
+  margin-top: 1.2rem;
+  color: var(--color-white);
+  opacity: 0.55;
+  font-size: 0.8rem;
+  text-decoration: underline;
+}
+
+.staff-login-link:hover {
+  opacity: 0.9;
+}
+
 /* ===== Responsive: pantallas chicas ===== */
 @media (max-width: 768px) {
   .nav-toggle {
