@@ -1,5 +1,3 @@
-const jobForm = document.querySelector('#jobForm');
-const jobFormFeedback = document.querySelector('#jobFormFeedback');
 const jobsList = document.querySelector('#jobsList');
 const dashboardGreeting = document.querySelector('#dashboardGreeting');
 const dashboardQuote = document.querySelector('#dashboardQuote');
@@ -56,7 +54,7 @@ async function loadJobs() {
   }
 
   if (!data || data.length === 0) {
-    jobsList.innerHTML = '<p class="note">No jobs yet — add one above.</p>';
+    jobsList.innerHTML = '<p class="note">No jobs yet — <a href="add-job.html">add one</a>.</p>';
     return;
   }
 
@@ -78,53 +76,4 @@ async function loadJobs() {
       <tbody>${rows}</tbody>
     </table>
   `;
-}
-
-if (jobForm) {
-  jobForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const clientName = document.querySelector('#jobClientName').value.trim();
-    const jobDate = document.querySelector('#jobDate').value;
-    const serviceType = document.querySelector('#jobServiceType').value;
-    const address = document.querySelector('#jobAddress').value.trim();
-    const notes = document.querySelector('#jobNotes').value.trim();
-
-    if (!clientName || !jobDate) {
-      jobFormFeedback.textContent = 'Please fill in the client name and date.';
-      return;
-    }
-
-    const submitBtn = document.querySelector('#jobSubmitBtn');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Adding...';
-
-    const { error } = await supabaseClient.from('jobs').insert({
-      client_name: clientName,
-      job_date: jobDate,
-      service_type: serviceType,
-      status: 'scheduled',
-      address: address || null,
-      notes: notes || null,
-    });
-
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Add Job';
-
-    if (error) {
-      jobFormFeedback.textContent = 'Something went wrong. Please try again.';
-      return;
-    }
-
-    jobFormFeedback.textContent = 'Job added!';
-    jobForm.reset();
-    loadJobs();
-  });
-}
-
-if (logoutBtn) {
-  logoutBtn.addEventListener('click', async () => {
-    await supabaseClient.auth.signOut();
-    window.location.href = 'login.html';
-  });
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manager Panel | Cyrca</title>
+  <title>Add a Job | Cyrca</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="../img/logo-icon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,8 +21,8 @@
         <img src="../img/logo-wordmark.png" alt="Cyrca" class="logo-wordmark">
       </a>
       <ul class="portal-nav">
-        <li><a href="panel.html" class="active">Dashboard</a></li>
-        <li><a href="add-job.html">Add a Job</a></li>
+        <li><a href="panel.html">Dashboard</a></li>
+        <li><a href="add-job.html" class="active">Add a Job</a></li>
         <li><a href="factura.html">Create Invoice</a></li>
       </ul>
       <div class="portal-sidebar-footer">
@@ -32,25 +32,34 @@
     </aside>
 
     <main class="portal-content">
-      <h1>Dashboard</h1>
-
-      <section class="dashboard-intro">
-        <div class="dashboard-intro-text">
-          <p id="dashboardGreeting" class="dashboard-greeting">Hello!</p>
-          <img
-            class="dashboard-photo"
-            src="https://images.pexels.com/photos/9230462/pexels-photo-9230462.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400"
-            alt="Cleaning supplies"
-          >
-        </div>
-        <blockquote id="dashboardQuote" class="dashboard-quote"></blockquote>
-      </section>
+      <h1>Add a Job</h1>
 
       <section class="portal-card">
-        <h2>Upcoming &amp; Past Jobs</h2>
-        <div id="jobsList">
-          <p class="note">Loading...</p>
-        </div>
+        <form id="jobForm" novalidate>
+          <label for="jobClientName">Client Name</label>
+          <input type="text" id="jobClientName">
+          <span class="field-error" id="jobClientName-error"></span>
+
+          <label for="jobDate">Date</label>
+          <input type="date" id="jobDate">
+          <span class="field-error" id="jobDate-error"></span>
+
+          <label for="jobServiceType">Service Type</label>
+          <select id="jobServiceType">
+            <option value="residential">Residential Cleaning</option>
+            <option value="office">Office &amp; Commercial</option>
+            <option value="moveinout">Move In / Move Out</option>
+          </select>
+
+          <label for="jobAddress">Address (optional)</label>
+          <input type="text" id="jobAddress">
+
+          <label for="jobNotes">Notes (optional)</label>
+          <textarea id="jobNotes" rows="2"></textarea>
+
+          <button type="submit" class="button" id="jobSubmitBtn">Add Job</button>
+        </form>
+        <p class="form-feedback" id="jobFormFeedback"></p>
       </section>
     </main>
   </div>
@@ -58,6 +67,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-client.js"></script>
   <script src="js/auth-guard.js"></script>
-  <script src="js/panel.js"></script>
+  <script src="js/add-job.js"></script>
 </body>
 </html>
