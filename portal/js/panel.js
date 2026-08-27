@@ -1,6 +1,7 @@
 const jobsList = document.querySelector('#jobsList');
 const dashboardGreeting = document.querySelector('#dashboardGreeting');
 const dashboardQuote = document.querySelector('#dashboardQuote');
+const kpiGrid = document.querySelector('#kpiGrid');
 
 const SERVICE_TYPE_LABELS = {
   residential: 'Residential',
@@ -50,8 +51,11 @@ async function loadJobs() {
 
   if (error) {
     jobsList.innerHTML = '<p class="note">Could not load jobs.</p>';
+    kpiGrid.innerHTML = '<p class="note">Could not load stats.</p>';
     return;
   }
+
+  renderKPIs(data || []);
 
   if (!data || data.length === 0) {
     jobsList.innerHTML = '<p class="note">No jobs yet — <a href="add-job.html">add one</a>.</p>';
@@ -75,5 +79,48 @@ async function loadJobs() {
       </thead>
       <tbody>${rows}</tbody>
     </table>
+  `;
+}
+
+function renderKPIs(jobs) {
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  const completedJobs = jobs.filter((job) => job.status === 'completed' && job.price);
+  const totalRevenue = completedJobs.reduce((sum, job) => sum + Number(job.price), 0);
+  const avgJobValue = completedJobs.length > 0 ? totalRevenue / completedJobs.length : 0;
+  const upcomingCount = jobs.filter((job) => job.status === 'scheduled' && job.job_date >= todayStr).length;
+
+  const byServiceType = { residential: 0, office: 0, moveinout: 0 };
+  jobs.forEach((job) => {
+    if (byServiceType[job.service_type] !== undefined) {
+      byServiceType[job.service_type] += 1;
+    }
+  });
+
+  const breakdownHtml = Object.keys(SERVICE_TYPE_LABELS).map((type) => `
+    <span class="kpi-breakdown-item"><strong>${byServiceType[type]}</strong> ${SERVICE_TYPE_LABELS[type]}</span>
+  `).join('');
+
+  kpiGrid.innerHTML = `
+    <div class="kpi-card">
+      <span class="kpi-card-value">$${totalRevenue.toFixed(0)}</span>
+      <span class="kpi-card-label">Total Revenue</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-card-value">${jobs.length}</span>
+      <span class="kpi-card-label">Total Jobs</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-card-value">${upcomingCount}</span>
+      <span class="kpi-card-label">Upcoming Jobs</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-card-value">$${avgJobValue.toFixed(0)}</span>
+      <span class="kpi-card-label">Avg. Job Value</span>
+    </div>
+    <div class="kpi-card kpi-card-wide">
+      <span class="kpi-card-label">Jobs by Service Type</span>
+      <div class="kpi-breakdown">${breakdownHtml}</div>
+    </div>
   `;
 }

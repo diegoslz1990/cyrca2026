@@ -336,6 +336,59 @@
   color: var(--color-green-dark);
 }
 
+/* ===== KPIs del Dashboard ===== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.kpi-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.3rem 1.2rem;
+}
+
+.kpi-card-value {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  color: var(--color-blue);
+  margin-bottom: 0.2rem;
+}
+
+.kpi-card-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.kpi-card-wide {
+  grid-column: 1 / -1;
+}
+
+.kpi-card-wide .kpi-card-value {
+  font-size: 1.1rem;
+}
+
+.kpi-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.kpi-breakdown-item {
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.kpi-breakdown-item strong {
+  color: var(--color-blue);
+}
+
 /* ===== Calendario ===== */
 .calendar-header {
   display: flex;
