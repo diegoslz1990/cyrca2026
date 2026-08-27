@@ -1,3 +1,29 @@
+requireAuth();
+
+function showError(field, message) {
+  const errorEl = document.getElementById(`${field.id}-error`);
+  errorEl.textContent = message;
+  field.classList.add('invalid');
+}
+
+function clearError(field) {
+  const errorEl = document.getElementById(`${field.id}-error`);
+  errorEl.textContent = '';
+  field.classList.remove('invalid');
+}
+
+const SIZE_LABELS = {
+  small: 'Small Home',
+  medium: 'Medium Home',
+  large: 'Large Home',
+};
+
+const DIFFICULTY_LABELS = {
+  light: 'Light Maintenance',
+  standard: 'Standard Clean',
+  deep: 'Deep Clean',
+};
+
 const generateInvoiceBtn = document.querySelector('#generateInvoiceBtn');
 const printInvoiceBtn = document.querySelector('#printInvoiceBtn');
 const invoicePreview = document.querySelector('#invoicePreview');
@@ -15,9 +41,7 @@ function getNextInvoiceNumber() {
   return `INV-${String(next).padStart(4, '0')}`;
 }
 
-// Guarda un registro de la factura en Formspree, para tener un listado de clientes.
-// Es un envio "de fondo": si falla (por ejemplo, sin internet), la factura
-// igual se genera y se puede imprimir con normalidad.
+// Guarda un registro de la factura en Formspree, como respaldo extra.
 const INVOICE_LOG_URL = 'https://formspree.io/f/xqpzvgqg';
 
 function logInvoiceRecord(record) {
@@ -26,32 +50,27 @@ function logInvoiceRecord(record) {
     body: JSON.stringify(record),
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
   }).catch((error) => {
-    console.warn('Could not save invoice record:', error);
+    console.warn('Could not save invoice record to Formspree:', error);
   });
 }
 
 // Guarda el trabajo en la tabla "jobs" de Supabase, para que aparezca en el
-// Manager Panel. Solo funciona si quien genera la factura esta logueada en
-// el portal en ese mismo navegador (las reglas de seguridad de Supabase
-// exigen sesion iniciada). Si no hay sesion, esto falla en silencio y la
-// factura se genera igual con normalidad.
+// Dashboard. Como esta pagina ya exige estar logueada (requireAuth), esto
+// deberia funcionar siempre.
 function logJobToSupabase(job) {
-  if (typeof supabaseClient === 'undefined') {
-    return;
-  }
   supabaseClient
     .from('jobs')
     .insert(job)
     .then(({ error }) => {
       if (error) {
-        console.warn('Could not save job to the manager panel (log in to the portal in this browser first):', error);
+        console.warn('Could not save job to the dashboard:', error);
       }
     });
 }
 
 if (generateInvoiceBtn) {
   generateInvoiceBtn.addEventListener('click', async () => {
-    await pricingReady; // asegura que usemos los precios reales de la planilla, si ya llegaron
+    await pricingReady; // asegura que usemos los precios reales del archivo, si ya llegaron
 
     const clientNameField = document.querySelector('#clientName');
     const serviceDateField = document.querySelector('#serviceDate');

@@ -10,64 +10,70 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css?v=1">
-  <link rel="stylesheet" href="css/portal.css?v=2">
+  <link rel="stylesheet" href="css/portal.css?v=3">
 </head>
 <body>
 
-  <header class="portal-header">
-    <a href="panel.html" class="logo">
-      <img src="../img/logo-icon.png" alt="" class="logo-icon">
-      <img src="../img/logo-wordmark.png" alt="Cyrca" class="logo-wordmark">
-    </a>
-    <div>
-      <span id="userEmailDisplay" class="portal-user-email"></span>
-      <button id="logoutBtn" class="portal-logout-btn">Log Out</button>
-    </div>
-  </header>
-
-  <main class="portal-main">
-    <h1>Manager Panel</h1>
-    <p>Welcome! This is your private dashboard — clients can't see this page.</p>
-
-    <section class="portal-card">
-      <h2>Schedule a New Job</h2>
-      <form id="jobForm" novalidate>
-        <label for="jobClientName">Client Name</label>
-        <input type="text" id="jobClientName">
-        <span class="field-error" id="jobClientName-error"></span>
-
-        <label for="jobDate">Date</label>
-        <input type="date" id="jobDate">
-        <span class="field-error" id="jobDate-error"></span>
-
-        <label for="jobServiceType">Service Type</label>
-        <select id="jobServiceType">
-          <option value="residential">Residential Cleaning</option>
-          <option value="office">Office &amp; Commercial</option>
-          <option value="moveinout">Move In / Move Out</option>
-        </select>
-
-        <label for="jobAddress">Address (optional)</label>
-        <input type="text" id="jobAddress">
-
-        <label for="jobNotes">Notes (optional)</label>
-        <textarea id="jobNotes" rows="2"></textarea>
-
-        <button type="submit" class="button" id="jobSubmitBtn">Add Job</button>
-      </form>
-      <p class="form-feedback" id="jobFormFeedback"></p>
-    </section>
-
-    <section class="portal-card">
-      <h2>Upcoming &amp; Past Jobs</h2>
-      <div id="jobsList">
-        <p class="note">Loading...</p>
+  <div class="portal-layout">
+    <aside class="portal-sidebar">
+      <a href="panel.html" class="logo">
+        <img src="../img/logo-icon.png" alt="" class="logo-icon">
+        <img src="../img/logo-wordmark.png" alt="Cyrca" class="logo-wordmark">
+      </a>
+      <ul class="portal-nav">
+        <li><a href="panel.html" class="active">Dashboard</a></li>
+        <li><a href="factura.html">Create Invoice</a></li>
+      </ul>
+      <div class="portal-sidebar-footer">
+        <span id="userEmailDisplay" class="portal-user-email"></span>
+        <button id="logoutBtn" class="portal-logout-btn">Log Out</button>
       </div>
-    </section>
-  </main>
+    </aside>
+
+    <main class="portal-content">
+      <h1>Dashboard</h1>
+
+      <section class="portal-card">
+        <h2>Schedule a New Job</h2>
+        <form id="jobForm" novalidate>
+          <label for="jobClientName">Client Name</label>
+          <input type="text" id="jobClientName">
+          <span class="field-error" id="jobClientName-error"></span>
+
+          <label for="jobDate">Date</label>
+          <input type="date" id="jobDate">
+          <span class="field-error" id="jobDate-error"></span>
+
+          <label for="jobServiceType">Service Type</label>
+          <select id="jobServiceType">
+            <option value="residential">Residential Cleaning</option>
+            <option value="office">Office &amp; Commercial</option>
+            <option value="moveinout">Move In / Move Out</option>
+          </select>
+
+          <label for="jobAddress">Address (optional)</label>
+          <input type="text" id="jobAddress">
+
+          <label for="jobNotes">Notes (optional)</label>
+          <textarea id="jobNotes" rows="2"></textarea>
+
+          <button type="submit" class="button" id="jobSubmitBtn">Add Job</button>
+        </form>
+        <p class="form-feedback" id="jobFormFeedback"></p>
+      </section>
+
+      <section class="portal-card">
+        <h2>Upcoming &amp; Past Jobs</h2>
+        <div id="jobsList">
+          <p class="note">Loading...</p>
+        </div>
+      </section>
+    </main>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-client.js"></script>
+  <script src="js/auth-guard.js"></script>
   <script src="js/panel.js"></script>
 </body>
 </html>

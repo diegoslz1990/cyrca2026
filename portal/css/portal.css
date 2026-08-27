@@ -67,28 +67,69 @@
   cursor: pointer;
 }
 
-/* ===== Panel (despues de iniciar sesion) ===== */
-.portal-header {
+/* ===== Layout del portal (panel lateral + contenido) ===== */
+.portal-layout {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  background-color: var(--color-white);
-  box-shadow: var(--shadow);
+  min-height: 100vh;
 }
 
-.portal-header > div {
+.portal-sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow);
+  padding: 1.5rem 1.2rem;
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+}
+
+.portal-sidebar .logo {
+  margin-bottom: 2rem;
+}
+
+.portal-nav {
+  list-style: none;
+  flex: 1;
+}
+
+.portal-nav li {
+  margin-bottom: 0.3rem;
+}
+
+.portal-nav a {
+  display: block;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius);
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.portal-nav a:hover {
+  background-color: var(--color-bg);
+  text-decoration: none;
+}
+
+.portal-nav a.active {
+  background-color: rgba(13, 71, 199, 0.08);
+  color: var(--color-blue);
+}
+
+.portal-sidebar-footer {
+  border-top: 1px solid var(--color-bg);
+  padding-top: 1rem;
 }
 
 .portal-user-email {
+  display: block;
   color: var(--color-text-light);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.7rem;
+  word-break: break-all;
 }
 
 .portal-logout-btn {
+  width: 100%;
   background: none;
   border: 2px solid var(--color-blue);
   color: var(--color-blue);
@@ -103,14 +144,61 @@
   background-color: rgba(13, 71, 199, 0.08);
 }
 
-.portal-main {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
+.portal-content {
+  flex: 1;
+  min-width: 0;
+  padding: 2.5rem;
 }
 
-.portal-main h1 {
+.portal-content h1 {
   margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .portal-layout {
+    flex-direction: column;
+  }
+
+  .portal-sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .portal-sidebar .logo {
+    margin-bottom: 0;
+    margin-right: auto;
+  }
+
+  .portal-nav {
+    flex: 0 0 100%;
+    display: flex;
+    gap: 0.5rem;
+    order: 3;
+    margin-top: 0.8rem;
+  }
+
+  .portal-sidebar-footer {
+    border-top: none;
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .portal-user-email {
+    margin-bottom: 0;
+  }
+
+  .portal-logout-btn {
+    width: auto;
+  }
+
+  .portal-content {
+    padding: 1.5rem;
+  }
 }
 
 .portal-card {

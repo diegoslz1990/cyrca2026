@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Invoice | Cyrca</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../img/logo-icon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=1">
+  <link rel="stylesheet" href="css/portal.css?v=3">
+</head>
+<body>
+
+  <div class="portal-layout">
+    <aside class="portal-sidebar no-print">
+      <a href="panel.html" class="logo">
+        <img src="../img/logo-icon.png" alt="" class="logo-icon">
+        <img src="../img/logo-wordmark.png" alt="Cyrca" class="logo-wordmark">
+      </a>
+      <ul class="portal-nav">
+        <li><a href="panel.html">Dashboard</a></li>
+        <li><a href="factura.html" class="active">Create Invoice</a></li>
+      </ul>
+      <div class="portal-sidebar-footer">
+        <span id="userEmailDisplay" class="portal-user-email"></span>
+        <button id="logoutBtn" class="portal-logout-btn">Log Out</button>
+      </div>
+    </aside>
+
+    <main class="portal-content">
+      <h1 class="no-print">Create Invoice</h1>
+
+      <section class="invoice-form no-print">
+        <label for="clientName">Client Name</label>
+        <input type="text" id="clientName">
+        <span class="field-error" id="clientName-error"></span>
+
+        <label for="serviceDate">Service Date</label>
+        <input type="date" id="serviceDate">
+        <span class="field-error" id="serviceDate-error"></span>
+
+        <label for="invoiceSize">Home Size</label>
+        <select id="invoiceSize">
+          <option value="small">Small (1-2 bedrooms)</option>
+          <option value="medium">Medium (3-4 bedrooms)</option>
+          <option value="large">Large (5+ bedrooms)</option>
+        </select>
+
+        <label for="invoiceDifficulty">Cleaning Difficulty</label>
+        <select id="invoiceDifficulty">
+          <option value="light">Light (regular maintenance)</option>
+          <option value="standard">Standard</option>
+          <option value="deep">Deep Clean</option>
+        </select>
+
+        <label for="invoiceNotes">Notes (optional)</label>
+        <textarea id="invoiceNotes" rows="3"></textarea>
+
+        <button type="button" id="generateInvoiceBtn" class="button">Generate Invoice</button>
+      </section>
+
+      <section class="invoice-preview hidden" id="invoicePreview">
+        <div class="invoice-header">
+          <div>
+            <h2>Cyrca</h2>
+            <p>Cleaning Services<br>Florence, Kentucky and surrounding areas</p>
+          </div>
+          <div class="invoice-meta">
+            <p><strong>Invoice</strong> <span id="invoiceNumber"></span></p>
+            <p><strong>Date</strong> <span id="invoiceDate"></span></p>
+          </div>
+        </div>
+
+        <div class="invoice-bill-to">
+          <h3>Bill To</h3>
+          <p id="invoiceClientName"></p>
+        </div>
+
+        <table class="invoice-table">
+          <thead>
+            <tr><th>Description</th><th>Amount</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="invoiceServiceDesc"></td>
+              <td id="invoiceServiceAmount"></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="invoice-total">
+              <td>Total</td>
+              <td id="invoiceTotal"></td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <p id="invoiceNotesDisplay" class="invoice-notes"></p>
+
+        <p class="invoice-thanks">Thank you for choosing Cyrca!</p>
+
+        <button type="button" id="printInvoiceBtn" class="button no-print">Print / Save as PDF</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth-guard.js"></script>
+  <script src="../js/pricing.js?v=1"></script>
+  <script src="js/factura.js"></script>
+</body>
+</html>

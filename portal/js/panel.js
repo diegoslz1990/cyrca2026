@@ -1,5 +1,3 @@
-const logoutBtn = document.querySelector('#logoutBtn');
-const userEmailDisplay = document.querySelector('#userEmailDisplay');
 const jobForm = document.querySelector('#jobForm');
 const jobFormFeedback = document.querySelector('#jobFormFeedback');
 const jobsList = document.querySelector('#jobsList');
@@ -10,22 +8,11 @@ const SERVICE_TYPE_LABELS = {
   moveinout: 'Move In / Move Out',
 };
 
-async function checkAuth() {
-  const { data } = await supabaseClient.auth.getSession();
-
-  if (!data.session) {
-    window.location.href = 'login.html';
-    return;
+requireAuth().then((session) => {
+  if (session) {
+    loadJobs();
   }
-
-  if (userEmailDisplay) {
-    userEmailDisplay.textContent = data.session.user.email;
-  }
-
-  loadJobs();
-}
-
-checkAuth();
+});
 
 async function loadJobs() {
   const { data, error } = await supabaseClient
