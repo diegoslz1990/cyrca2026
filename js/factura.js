@@ -30,6 +30,25 @@ function logInvoiceRecord(record) {
   });
 }
 
+// Guarda el trabajo en la tabla "jobs" de Supabase, para que aparezca en el
+// Manager Panel. Solo funciona si quien genera la factura esta logueada en
+// el portal en ese mismo navegador (las reglas de seguridad de Supabase
+// exigen sesion iniciada). Si no hay sesion, esto falla en silencio y la
+// factura se genera igual con normalidad.
+function logJobToSupabase(job) {
+  if (typeof supabaseClient === 'undefined') {
+    return;
+  }
+  supabaseClient
+    .from('jobs')
+    .insert(job)
+    .then(({ error }) => {
+      if (error) {
+        console.warn('Could not save job to the manager panel (log in to the portal in this browser first):', error);
+      }
+    });
+}
+
 if (generateInvoiceBtn) {
   generateInvoiceBtn.addEventListener('click', async () => {
     await pricingReady; // asegura que usemos los precios reales de la planilla, si ya llegaron
@@ -80,6 +99,16 @@ if (generateInvoiceBtn) {
       service: description,
       total: `$${total}`,
       notes,
+    });
+
+    logJobToSupabase({
+      client_name: clientNameField.value.trim(),
+      job_date: serviceDateField.value,
+      service_type: 'residential',
+      status: 'completed',
+      price: total,
+      notes: notes || null,
+      invoice_number: invoiceNumber,
     });
   });
 }
