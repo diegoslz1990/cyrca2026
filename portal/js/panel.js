@@ -1,6 +1,8 @@
 const jobForm = document.querySelector('#jobForm');
 const jobFormFeedback = document.querySelector('#jobFormFeedback');
 const jobsList = document.querySelector('#jobsList');
+const dashboardGreeting = document.querySelector('#dashboardGreeting');
+const dashboardQuote = document.querySelector('#dashboardQuote');
 
 const SERVICE_TYPE_LABELS = {
   residential: 'Residential',
@@ -8,8 +10,36 @@ const SERVICE_TYPE_LABELS = {
   moveinout: 'Move In / Move Out',
 };
 
+// Nombres conocidos por email. Cuando mi tia tenga su usuario, agregar su
+// email real aca — mientras tanto, cualquier otro email se asume que es Ynes.
+const NAME_BY_EMAIL = {
+  'jdiegosalazar0@gmail.com': 'Diego',
+};
+
+const QUOTES = [
+  'A clean space is a happy space.',
+  'Every job done well builds the business a little more.',
+  'Small details make the biggest difference.',
+  'Consistency is what turns clients into regulars.',
+  'Take pride in the work — it shows.',
+];
+
+function showGreetingAndQuote(session) {
+  if (dashboardGreeting) {
+    const email = session.user.email;
+    const name = NAME_BY_EMAIL[email] || 'Ynes';
+    dashboardGreeting.textContent = `Hello ${name}!`;
+  }
+
+  if (dashboardQuote) {
+    const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+    dashboardQuote.textContent = `"${quote}"`;
+  }
+}
+
 requireAuth().then((session) => {
   if (session) {
+    showGreetingAndQuote(session);
     loadJobs();
   }
 });

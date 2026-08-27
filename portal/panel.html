@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css?v=1">
-  <link rel="stylesheet" href="css/portal.css?v=3">
+  <link rel="stylesheet" href="css/portal.css?v=4">
 </head>
 <body>
 
@@ -33,8 +33,20 @@
     <main class="portal-content">
       <h1>Dashboard</h1>
 
+      <section class="dashboard-intro">
+        <div class="dashboard-intro-text">
+          <p id="dashboardGreeting" class="dashboard-greeting">Hello!</p>
+          <img
+            class="dashboard-photo"
+            src="https://images.pexels.com/photos/9230462/pexels-photo-9230462.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400"
+            alt="Cleaning supplies"
+          >
+        </div>
+        <blockquote id="dashboardQuote" class="dashboard-quote"></blockquote>
+      </section>
+
       <section class="portal-card">
-        <h2>Schedule a New Job</h2>
+        <h2>Add a Job</h2>
         <form id="jobForm" novalidate>
           <label for="jobClientName">Client Name</label>
           <input type="text" id="jobClientName">
