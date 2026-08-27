@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Login | Cyrca</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../img/logo-icon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=1">
+  <link rel="stylesheet" href="css/portal.css?v=1">
+</head>
+<body class="portal-body">
+
+  <div class="portal-login-card">
+    <img src="../img/logo-icon.png" alt="Cyrca" class="portal-logo-icon">
+    <h1>Manager Login</h1>
+    <p class="note">This area is for Cyrca staff only.</p>
+
+    <form id="loginForm" novalidate>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required autocomplete="username">
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password">
+
+      <p class="field-error" id="loginError"></p>
+
+      <button type="submit" class="button" id="loginBtn">Log In</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>
