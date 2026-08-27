@@ -335,3 +335,110 @@
   background-color: rgba(71, 174, 46, 0.12);
   color: var(--color-green-dark);
 }
+
+/* ===== Calendario ===== */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.calendar-header h2 {
+  min-width: 180px;
+  text-align: center;
+}
+
+.calendar-nav-btn {
+  background: none;
+  border: 2px solid var(--color-blue);
+  color: var(--color-blue);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.calendar-nav-btn:hover {
+  background-color: rgba(13, 71, 199, 0.08);
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-text-light);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.4rem;
+}
+
+.calendar-day {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.calendar-day.other-month {
+  background-color: transparent;
+  cursor: default;
+}
+
+.calendar-day.today .calendar-day-number {
+  font-weight: 700;
+  color: var(--color-blue);
+}
+
+.calendar-day.has-jobs {
+  background-color: rgba(13, 71, 199, 0.08);
+}
+
+.calendar-day.selected {
+  border-color: var(--color-blue);
+}
+
+.calendar-day-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  font-size: 0.7rem;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+}
+
+@media (max-width: 600px) {
+  .calendar-day {
+    font-size: 0.8rem;
+  }
+
+  .calendar-day-badge {
+    font-size: 0.6rem;
+  }
+}

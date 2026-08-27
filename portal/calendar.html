@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manager Panel | Cyrca</title>
+  <title>Calendar | Cyrca</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="../img/logo-icon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,8 +21,8 @@
         <img src="../img/logo-wordmark.png" alt="Cyrca" class="logo-wordmark">
       </a>
       <ul class="portal-nav">
-        <li><a href="panel.html" class="active">Dashboard</a></li>
-        <li><a href="calendar.html">Calendar</a></li>
+        <li><a href="panel.html">Dashboard</a></li>
+        <li><a href="calendar.html" class="active">Calendar</a></li>
         <li><a href="add-job.html">Add a Job</a></li>
         <li><a href="factura.html">Create Invoice</a></li>
       </ul>
@@ -33,24 +33,26 @@
     </aside>
 
     <main class="portal-content">
-      <h1>Dashboard</h1>
+      <h1>Calendar</h1>
 
-      <section class="dashboard-intro">
-        <div class="dashboard-intro-text">
-          <p id="dashboardGreeting" class="dashboard-greeting">Hello!</p>
-          <img
-            class="dashboard-photo"
-            src="https://images.pexels.com/photos/9230462/pexels-photo-9230462.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=400"
-            alt="Cleaning supplies"
-          >
+      <section class="portal-card">
+        <div class="calendar-header">
+          <button type="button" id="calendarPrevBtn" class="calendar-nav-btn" aria-label="Previous month">&#8592;</button>
+          <h2 id="calendarMonthLabel"></h2>
+          <button type="button" id="calendarNextBtn" class="calendar-nav-btn" aria-label="Next month">&#8594;</button>
         </div>
-        <blockquote id="dashboardQuote" class="dashboard-quote"></blockquote>
+
+        <div class="calendar-weekdays">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+
+        <div id="calendarGrid" class="calendar-grid"></div>
       </section>
 
       <section class="portal-card">
-        <h2>Upcoming &amp; Past Jobs</h2>
-        <div id="jobsList">
-          <p class="note">Loading...</p>
+        <h2 id="calendarDayTitle">Jobs</h2>
+        <div id="calendarDayJobs">
+          <p class="note">Click a day on the calendar to see its jobs.</p>
         </div>
       </section>
     </main>
@@ -59,6 +61,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-client.js"></script>
   <script src="js/auth-guard.js"></script>
-  <script src="js/panel.js"></script>
+  <script src="js/calendar.js"></script>
 </body>
 </html>
