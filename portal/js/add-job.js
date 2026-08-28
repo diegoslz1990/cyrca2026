@@ -9,6 +9,7 @@ if (jobForm) {
 
     const clientName = document.querySelector('#jobClientName').value.trim();
     const jobDate = document.querySelector('#jobDate').value;
+    const jobTime = document.querySelector('#jobTime').value;
     const serviceType = document.querySelector('#jobServiceType').value;
     const address = document.querySelector('#jobAddress').value.trim();
     const notes = document.querySelector('#jobNotes').value.trim();
@@ -25,6 +26,7 @@ if (jobForm) {
     const { error } = await supabaseClient.from('jobs').insert({
       client_name: clientName,
       job_date: jobDate,
+      job_time: jobTime || null,
       service_type: serviceType,
       status: 'scheduled',
       address: address || null,

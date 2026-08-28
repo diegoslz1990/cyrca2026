@@ -12,17 +12,8 @@ function clearError(field) {
   field.classList.remove('invalid');
 }
 
-const SIZE_LABELS = {
-  small: 'Small Home',
-  medium: 'Medium Home',
-  large: 'Large Home',
-};
-
-const DIFFICULTY_LABELS = {
-  light: 'Light Maintenance',
-  standard: 'Standard Clean',
-  deep: 'Deep Clean',
-};
+// SIZE_LABELS y DIFFICULTY_LABELS ya vienen definidos globalmente por
+// ../js/pricing.js (que se carga antes que este archivo).
 
 const generateInvoiceBtn = document.querySelector('#generateInvoiceBtn');
 const printInvoiceBtn = document.querySelector('#printInvoiceBtn');

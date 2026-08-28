@@ -36,6 +36,15 @@ function dateKey(year, month, day) {
   return `${year}-${pad(month + 1)}-${pad(day)}`;
 }
 
+function formatTime(timeStr) {
+  if (!timeStr) return '';
+  const [hourStr, minuteStr] = timeStr.split(':');
+  const hour = parseInt(hourStr, 10);
+  const period = hour >= 12 ? 'PM' : 'AM';
+  const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+  return `${hour12}:${minuteStr} ${period}`;
+}
+
 async function loadJobs() {
   const { data, error } = await supabaseClient
     .from('jobs')
@@ -53,6 +62,11 @@ async function loadJobs() {
       jobsByDate[job.job_date] = [];
     }
     jobsByDate[job.job_date].push(job);
+  });
+
+  // Dentro de cada dia, mostrar primero los trabajos que tienen hora, en orden.
+  Object.values(jobsByDate).forEach((jobs) => {
+    jobs.sort((a, b) => (a.job_time || '99:99').localeCompare(b.job_time || '99:99'));
   });
 
   renderCalendar();
@@ -79,14 +93,24 @@ function renderCalendar() {
     if (jobsThatDay.length > 0) classes.push('has-jobs');
     if (key === selectedDate) classes.push('selected');
 
-    const badge = jobsThatDay.length > 0
-      ? `<span class="calendar-day-badge">${jobsThatDay.length}</span>`
+    const MAX_VISIBLE_JOBS = 2;
+    const visibleJobs = jobsThatDay.slice(0, MAX_VISIBLE_JOBS);
+    const extraCount = jobsThatDay.length - visibleJobs.length;
+
+    const jobChips = visibleJobs.map((job) => {
+      const time = formatTime(job.job_time);
+      const label = time ? `${job.client_name} · ${time}` : job.client_name;
+      return `<span class="calendar-day-job">${label}</span>`;
+    }).join('');
+
+    const moreLabel = extraCount > 0
+      ? `<span class="calendar-day-more">+${extraCount} more</span>`
       : '';
 
     cellsHtml += `
       <button type="button" class="${classes.join(' ')}" data-date="${key}">
         <span class="calendar-day-number">${day}</span>
-        ${badge}
+        <div class="calendar-day-jobs">${jobChips}${moreLabel}</div>
       </button>
     `;
   }
@@ -114,6 +138,7 @@ function showDayJobs(dateKeyValue) {
 
   const rows = jobsThatDay.map((job) => `
     <tr>
+      <td>${formatTime(job.job_time) || '—'}</td>
       <td>${job.client_name}</td>
       <td>${SERVICE_TYPE_LABELS[job.service_type] || job.service_type}</td>
       <td><span class="job-status job-status-${job.status}">${job.status}</span></td>
@@ -124,7 +149,7 @@ function showDayJobs(dateKeyValue) {
   calendarDayJobs.innerHTML = `
     <table class="jobs-table">
       <thead>
-        <tr><th>Client</th><th>Service</th><th>Status</th><th>Price</th></tr>
+        <tr><th>Time</th><th>Client</th><th>Service</th><th>Status</th><th>Price</th></tr>
       </thead>
       <tbody>${rows}</tbody>
     </table>

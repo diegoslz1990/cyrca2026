@@ -30,7 +30,10 @@ const DIFFICULTY_LABELS = {
   deep: 'Deep Clean',
 };
 
-const PRICING_FILE_URL = 'data/precios.txt';
+// Se calcula la ruta a partir de la ubicacion de este mismo script, para que
+// funcione tanto desde la raiz del sitio como desde paginas dentro de
+// portal/ (donde este archivo se carga como "../js/pricing.js").
+const PRICING_FILE_URL = new URL('../data/precios.txt', document.currentScript.src).href;
 
 const pricingReady = fetch(PRICING_FILE_URL)
   .then((response) => {
