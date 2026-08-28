@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="img/logo-icon.png" type="image/png">
-  <link rel="stylesheet" href="css/style.css?v=22">
+  <link rel="stylesheet" href="css/style.css?v=23">
 </head>
 <body>
 
@@ -96,6 +96,33 @@
     </svg>
   </a>
 
+  <button type="button" id="chatbotToggle" class="chatbot-toggle" aria-label="Chat with Cyrca's assistant">
+    <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="12" y1="2" x2="12" y2="5"/>
+      <circle cx="12" cy="1.5" r="1" fill="#ffffff" stroke="none"/>
+      <rect x="5" y="5" width="14" height="12" rx="3"/>
+      <circle cx="9" cy="11" r="1.2" fill="#ffffff" stroke="none"/>
+      <circle cx="15" cy="11" r="1.2" fill="#ffffff" stroke="none"/>
+      <line x1="9" y1="14.5" x2="15" y2="14.5"/>
+      <line x1="2" y1="10" x2="5" y2="10"/>
+      <line x1="19" y1="10" x2="22" y2="10"/>
+    </svg>
+  </button>
+
+  <div class="chatbot-panel hidden" id="chatbotPanel">
+    <div class="chatbot-header">
+      <span class="chatbot-header-title">Cyrca Assistant</span>
+      <button type="button" id="chatbotClose" class="chatbot-close" aria-label="Close chat">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="chatbot-message chatbot-message-bot">Hi! I'm the Cyrca assistant. Ask me about pricing, hours, or our services.</div>
+    </div>
+    <form class="chatbot-input-row" id="chatbotForm">
+      <input type="text" id="chatbotInput" placeholder="Type your question..." autocomplete="off">
+      <button type="submit" aria-label="Send">&#10148;</button>
+    </form>
+  </div>
+
   <footer>
     <p>Cyrca — Cleaning Services</p>
     <p>Florence, Kentucky and surrounding areas</p>
@@ -112,5 +139,6 @@
 
   <script src="js/pricing.js?v=20"></script>
   <script src="js/main.js?v=21"></script>
+  <script src="js/chatbot.js?v=1"></script>
 </body>
 </html>
