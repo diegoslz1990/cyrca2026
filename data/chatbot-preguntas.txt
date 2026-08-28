@@ -15,7 +15,7 @@ RESPUESTA: We're open Monday through Friday, 7:00 AM to 10:00 PM.
 PALABRAS: service, services, offer, servicio, servicios
 RESPUESTA: We offer Residential Cleaning, Office & Commercial Cleaning, and Move In/Move Out Cleaning. Check the "Services" page for full details.
 
-PALABRAS: residential, house, home, apartment, casa, apartamento, hogar
+PALABRAS: residential, apartment, house cleaning, home cleaning, clean my house, clean my home, casa, apartamento, hogar, limpieza residencial, limpieza de casa
 RESPUESTA: Our residential cleaning covers kitchens, bathrooms, bedrooms, living areas, and trash removal. Try our estimate tool for an instant price based on your home size.
 
 PALABRAS: office, commercial, business, oficina, negocio, comercial
