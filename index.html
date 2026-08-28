@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="img/logo-icon.png" type="image/png">
-  <link rel="stylesheet" href="css/style.css?v=23">
+  <link rel="stylesheet" href="css/style.css?v=24">
 </head>
 <body>
 
@@ -191,6 +191,12 @@
     <div class="chatbot-messages" id="chatbotMessages">
       <div class="chatbot-message chatbot-message-bot">Hi! I'm the Cyrca assistant. Ask me about pricing, hours, or our services.</div>
     </div>
+    <div class="chatbot-quick-replies" id="chatbotQuickReplies">
+      <button type="button" class="chatbot-quick-btn" data-question="How much does it cost?">💲 Pricing</button>
+      <button type="button" class="chatbot-quick-btn" data-question="What are your hours?">🕐 Hours</button>
+      <button type="button" class="chatbot-quick-btn" data-question="What areas do you serve?">📍 Service Area</button>
+      <button type="button" class="chatbot-quick-btn" data-question="How do I book a cleaning?">📅 Book Now</button>
+    </div>
     <form class="chatbot-input-row" id="chatbotForm">
       <input type="text" id="chatbotInput" placeholder="Type your question..." autocomplete="off">
       <button type="submit" aria-label="Send">&#10148;</button>
@@ -213,6 +219,6 @@
 
   <script src="js/main.js?v=21"></script>
   <script src="js/pricing.js?v=20"></script>
-  <script src="js/chatbot.js?v=3"></script>
+  <script src="js/chatbot.js?v=4"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@ const chatbotClose = document.querySelector('#chatbotClose');
 const chatbotMessages = document.querySelector('#chatbotMessages');
 const chatbotForm = document.querySelector('#chatbotForm');
 const chatbotInput = document.querySelector('#chatbotInput');
+const chatbotQuickReplies = document.querySelector('#chatbotQuickReplies');
 
 function openChatbot() {
   chatbotPanel.classList.remove('hidden');
@@ -118,24 +119,36 @@ function findResponse(userText) {
   return "I'm not sure about that one yet. Try asking about pricing, hours, services, or how to book — or reach us directly on WhatsApp or through the Contact page.";
 }
 
+async function sendMessage(text) {
+  addMessage(text, 'user');
+
+  if (typeof pricingReady !== 'undefined') {
+    await pricingReady; // asegura precios reales, no solo el respaldo
+  }
+
+  window.setTimeout(() => {
+    addMessage(findResponse(text), 'bot');
+  }, 400);
+}
+
 if (chatbotToggle && chatbotPanel) {
   chatbotToggle.addEventListener('click', openChatbot);
   chatbotClose.addEventListener('click', closeChatbot);
 
-  chatbotForm.addEventListener('submit', async (event) => {
+  chatbotForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const text = chatbotInput.value.trim();
     if (text === '') return;
 
-    addMessage(text, 'user');
     chatbotInput.value = '';
-
-    if (typeof pricingReady !== 'undefined') {
-      await pricingReady; // asegura precios reales, no solo el respaldo
-    }
-
-    window.setTimeout(() => {
-      addMessage(findResponse(text), 'bot');
-    }, 400);
+    sendMessage(text);
   });
+
+  if (chatbotQuickReplies) {
+    chatbotQuickReplies.addEventListener('click', (event) => {
+      const quickBtn = event.target.closest('.chatbot-quick-btn');
+      if (!quickBtn) return;
+      sendMessage(quickBtn.dataset.question);
+    });
+  }
 }
