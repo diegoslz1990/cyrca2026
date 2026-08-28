@@ -25,6 +25,35 @@ if (serviceDateInput) {
   serviceDateInput.value = new Date().toISOString().split('T')[0];
 }
 
+// Si venimos del boton "Finished" de un trabajo ya agendado, precargamos sus
+// datos y, al generar la factura, actualizamos ESE trabajo en vez de crear
+// uno duplicado.
+const linkedJobId = new URLSearchParams(window.location.search).get('jobId');
+let linkedJobServiceType = 'residential';
+
+if (linkedJobId) {
+  supabaseClient
+    .from('jobs')
+    .select('*')
+    .eq('id', linkedJobId)
+    .single()
+    .then(({ data: job, error }) => {
+      if (error || !job) {
+        console.warn('Could not load the linked job:', error);
+        return;
+      }
+      linkedJobServiceType = job.service_type;
+      document.querySelector('#clientName').value = job.client_name;
+      if (serviceDateInput) {
+        serviceDateInput.value = job.job_date;
+      }
+      const heading = document.querySelector('h1');
+      if (heading) {
+        heading.textContent = `Finish Job & Create Invoice — ${job.client_name}`;
+      }
+    });
+}
+
 function getNextInvoiceNumber() {
   const key = 'cyrcaInvoiceCounter';
   const next = parseInt(localStorage.getItem(key) || '0', 10) + 1;
@@ -48,15 +77,20 @@ function logInvoiceRecord(record) {
 // Guarda el trabajo en la tabla "jobs" de Supabase, para que aparezca en el
 // Dashboard. Como esta pagina ya exige estar logueada (requireAuth), esto
 // deberia funcionar siempre.
+//
+// Si la factura viene de un trabajo ya agendado (boton "Finished"), en vez
+// de insertar uno nuevo actualizamos ese mismo trabajo a "completed" — asi
+// no queda duplicado en el Dashboard ni en el Calendario.
 function logJobToSupabase(job) {
-  supabaseClient
-    .from('jobs')
-    .insert(job)
-    .then(({ error }) => {
-      if (error) {
-        console.warn('Could not save job to the dashboard:', error);
-      }
-    });
+  const query = linkedJobId
+    ? supabaseClient.from('jobs').update(job).eq('id', linkedJobId)
+    : supabaseClient.from('jobs').insert(job);
+
+  query.then(({ error }) => {
+    if (error) {
+      console.warn('Could not save job to the dashboard:', error);
+    }
+  });
 }
 
 if (generateInvoiceBtn) {
@@ -114,7 +148,7 @@ if (generateInvoiceBtn) {
     logJobToSupabase({
       client_name: clientNameField.value.trim(),
       job_date: serviceDateField.value,
-      service_type: 'residential',
+      service_type: linkedJobServiceType,
       status: 'completed',
       price: total,
       notes: notes || null,

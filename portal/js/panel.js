@@ -69,13 +69,14 @@ async function loadJobs() {
       <td>${SERVICE_TYPE_LABELS[job.service_type] || job.service_type}</td>
       <td><span class="job-status job-status-${job.status}">${job.status}</span></td>
       <td>${job.price ? `$${job.price}` : '—'}</td>
+      <td>${job.status === 'scheduled' ? `<a href="factura.html?jobId=${job.id}" class="finished-btn">Finished</a>` : ''}</td>
     </tr>
   `).join('');
 
   jobsList.innerHTML = `
     <table class="jobs-table">
       <thead>
-        <tr><th>Date</th><th>Client</th><th>Service</th><th>Status</th><th>Price</th></tr>
+        <tr><th>Date</th><th>Client</th><th>Service</th><th>Status</th><th>Price</th><th></th></tr>
       </thead>
       <tbody>${rows}</tbody>
     </table>

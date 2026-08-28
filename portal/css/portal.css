@@ -336,6 +336,24 @@
   color: var(--color-green-dark);
 }
 
+.finished-btn {
+  display: inline-block;
+  background-color: var(--color-green-dark);
+  color: var(--color-white);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.finished-btn:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
+
 /* ===== KPIs del Dashboard ===== */
 .kpi-grid {
   display: grid;
