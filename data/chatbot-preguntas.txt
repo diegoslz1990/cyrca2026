@@ -1,0 +1,43 @@
+# Preguntas y respuestas del chatbot.
+# Cada bloque: una linea PALABRAS: con palabras clave separadas por coma,
+# y una linea RESPUESTA: con lo que contesta el bot. Dejar una linea en
+# blanco entre cada bloque. Podes editar o agregar bloques nuevos.
+
+PALABRAS: hi, hello, hey, hola, buenas
+RESPUESTA: Hi there! I can help with pricing, hours, services, and how to book a cleaning. What would you like to know?
+
+PALABRAS: price, prices, pricing, cost, how much, quote, estimate, precio, precios, cuanto cuesta, presupuesto
+RESPUESTA: Pricing depends on your home size and cleaning type. Try our instant estimate tool on the "Get an Estimate" page for residential cleaning. Office and Move In/Out cleaning start at $150 and $220 and are confirmed based on your space.
+
+PALABRAS: hours, open, schedule, when, horario, horas, abierto
+RESPUESTA: We're open Monday through Friday, 7:00 AM to 10:00 PM.
+
+PALABRAS: service, services, offer, servicio, servicios
+RESPUESTA: We offer Residential Cleaning, Office & Commercial Cleaning, and Move In/Move Out Cleaning. Check the "Services" page for full details.
+
+PALABRAS: residential, house, home, apartment, casa, apartamento, hogar
+RESPUESTA: Our residential cleaning covers kitchens, bathrooms, bedrooms, living areas, and trash removal. Try our estimate tool for an instant price based on your home size.
+
+PALABRAS: office, commercial, business, oficina, negocio, comercial
+RESPUESTA: Office & Commercial cleaning covers desks, common areas, restrooms, and floors, with flexible scheduling including after-hours. Starting at $150 per visit.
+
+PALABRAS: move, moving, move in, move out, mudanza, mudarse
+RESPUESTA: Move In/Move Out cleaning is a deep, top-to-bottom clean for an empty home, starting at $220.
+
+PALABRAS: area, location, where, zona, ubicacion, donde
+RESPUESTA: We proudly serve Florence, Kentucky, Covington, and the surrounding areas.
+
+PALABRAS: contact, phone, call, whatsapp, email, contacto, telefono, llamar, correo
+RESPUESTA: You can reach us on WhatsApp or by phone at (973) 641-0021, or by email at cyrcacservices@gmail.com. There's also a contact form on our Contact page.
+
+PALABRAS: book, booking, appointment, reservar, agendar, cita
+RESPUESTA: To book a cleaning, use our "Get an Estimate" tool or reach out through the Contact page, WhatsApp, or phone — we'll confirm a date and time that works for you.
+
+PALABRAS: language, languages, spanish, english, idioma, idiomas, espanol, español, ingles, inglés
+RESPUESTA: We speak both English and Spanish — Hablamos inglés y español.
+
+PALABRAS: insured, bonded, insurance, seguro, asegurado
+RESPUESTA: Please contact us directly for details on insurance and coverage — reach out on WhatsApp or by phone at (973) 641-0021.
+
+PALABRAS: thanks, thank you, gracias
+RESPUESTA: You're welcome! Let us know if you have any other questions.

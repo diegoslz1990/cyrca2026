@@ -1,5 +1,5 @@
-// Fase 1: solo la ventanita del chat (abrir/cerrar + un mensaje de ejemplo).
-// El motor de respuestas de verdad (por palabras clave) llega en la Fase 2.
+// Fase 2: motor de respuestas por palabras clave, cargadas desde
+// data/chatbot-preguntas.txt (facil de editar sin tocar codigo).
 
 const chatbotToggle = document.querySelector('#chatbotToggle');
 const chatbotPanel = document.querySelector('#chatbotPanel');
@@ -27,6 +27,60 @@ function addMessage(text, sender) {
   chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 }
 
+// Quita tildes/acentos y pasa a minusculas, para que "cuánto" y "cuanto"
+// (o "Precio" y "precio") sean tratados igual al buscar coincidencias.
+function normalize(text) {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '');
+}
+
+let chatbotEntries = [];
+
+const CHATBOT_QA_URL = new URL('../data/chatbot-preguntas.txt', document.currentScript.src).href;
+
+fetch(CHATBOT_QA_URL)
+  .then((response) => response.text())
+  .then((text) => {
+    // Sacamos las lineas de comentario (#) antes de buscar bloques, para que
+    // el texto explicativo del encabezado no se confunda con una entrada real.
+    const cleanText = text
+      .split('\n')
+      .filter((line) => !line.trim().startsWith('#'))
+      .join('\n');
+
+    chatbotEntries = cleanText.split(/\n\s*\n/).map((block) => {
+      const keywordsLine = block.match(/PALABRAS:\s*(.+)/);
+      const responseLine = block.match(/RESPUESTA:\s*(.+)/);
+      if (!keywordsLine || !responseLine) return null;
+      return {
+        keywords: keywordsLine[1].split(',').map((k) => normalize(k.trim())),
+        response: responseLine[1].trim(),
+      };
+    }).filter(Boolean);
+  })
+  .catch((error) => {
+    console.warn('Could not load chatbot answers:', error);
+  });
+
+function findResponse(userText) {
+  const normalizedText = normalize(userText);
+  let bestMatch = null;
+  let bestScore = 0;
+
+  chatbotEntries.forEach((entry) => {
+    const score = entry.keywords.filter((keyword) => normalizedText.includes(keyword)).length;
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = entry;
+    }
+  });
+
+  if (bestMatch) return bestMatch.response;
+  return "I'm not sure about that one yet. Try asking about pricing, hours, services, or how to book — or reach us directly on WhatsApp or through the Contact page.";
+}
+
 if (chatbotToggle && chatbotPanel) {
   chatbotToggle.addEventListener('click', openChatbot);
   chatbotClose.addEventListener('click', closeChatbot);
@@ -39,9 +93,8 @@ if (chatbotToggle && chatbotPanel) {
     addMessage(text, 'user');
     chatbotInput.value = '';
 
-    // Respuesta temporal hasta la Fase 2 (motor de respuestas por palabras clave).
     window.setTimeout(() => {
-      addMessage("Thanks for your message! I'm still learning to answer questions here — for now, try our Contact page or WhatsApp for a quick reply.", 'bot');
+      addMessage(findResponse(text), 'bot');
     }, 400);
   });
 }
