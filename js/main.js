@@ -1,3 +1,21 @@
+// Animacion de aparicion al hacer scroll (elementos con clase "reveal")
+const revealElements = document.querySelectorAll('.reveal');
+
+if (revealElements.length > 0 && 'IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealElements.forEach((el) => revealObserver.observe(el));
+} else {
+  revealElements.forEach((el) => el.classList.add('reveal-visible'));
+}
+
 // Menu movil (hamburguesa)
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('#navMenu');

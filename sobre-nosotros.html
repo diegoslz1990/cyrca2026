@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="img/logo-icon.png" type="image/png">
-  <link rel="stylesheet" href="css/style.css?v=21">
+  <link rel="stylesheet" href="css/style.css?v=22">
 </head>
 <body>
 
@@ -39,21 +39,46 @@
       <p class="lang-note">We speak English and Spanish — Hablamos inglés y español.</p>
     </section>
 
-    <section class="story">
-      <h2>Our Story</h2>
-      <p>Cyrca was founded with a simple goal: provide dependable, high-quality cleaning with a personal touch — for homes, offices, and everything in between. As a small, local business, every client gets attention to detail and honest service.</p>
+    <section class="story reveal">
+      <div class="story-split">
+        <div class="story-split-text">
+          <h2>Our Story</h2>
+          <p>Cyrca was founded with a simple goal: provide dependable, high-quality cleaning with a personal touch — for homes, offices, and everything in between. As a small, local business, every client gets attention to detail and honest service.</p>
+        </div>
+        <div class="story-split-image">
+          <img src="https://images.pexels.com/photos/9462101/pexels-photo-9462101.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700" alt="Careful, detail-focused cleaning" loading="lazy" width="700" height="467">
+        </div>
+      </div>
     </section>
 
-    <section class="values">
+    <section class="values reveal">
       <h2>Our Values</h2>
-      <ul>
-        <li><strong>Trust:</strong> We treat every home with respect and care.</li>
-        <li><strong>Reliability:</strong> We show up on time and do the job right.</li>
-        <li><strong>Transparency:</strong> Clear pricing and honest communication.</li>
-      </ul>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>Trust</h3>
+          <p>We treat every home with the same respect and care we'd want for our own.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          </div>
+          <h3>Reliability</h3>
+          <p>We show up on time and do the job right, every single visit.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 12.6 12.6 20.6a2 2 0 0 1-2.8 0L3 13.8V3h10.8l6.8 6.8a2 2 0 0 1 0 2.8Z"/><circle cx="7.5" cy="7.5" r="1"/></svg>
+          </div>
+          <h3>Transparency</h3>
+          <p>Clear pricing and honest communication, from the first quote to the final visit.</p>
+        </div>
+      </div>
     </section>
 
-    <section class="service-area" id="where-we-work">
+    <section class="service-area reveal" id="where-we-work">
       <h2>Where We Work</h2>
       <p>We serve Florence, Kentucky, Covington, and the surrounding communities.</p>
       <div class="map-embed">
@@ -65,6 +90,12 @@
       </div>
     </section>
   </main>
+
+  <a href="https://wa.me/19736410021" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Message us on WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="#ffffff" aria-hidden="true">
+      <path d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4C7.2 4 3.27 7.93 3.27 12.78c0 1.56.4 3.08 1.18 4.42L3.2 21.5l4.4-1.15a8.8 8.8 0 0 0 4.44 1.2h.01c4.85 0 8.78-3.93 8.78-8.78a8.7 8.7 0 0 0-2.63-6.45Zm-5.55 13.5h-.01a7.3 7.3 0 0 1-3.72-1.02l-.27-.16-2.61.68.7-2.55-.17-.26a7.28 7.28 0 0 1-1.12-3.9c0-4.03 3.28-7.31 7.32-7.31 1.95 0 3.79.76 5.17 2.14a7.26 7.26 0 0 1 2.14 5.18c0 4.04-3.29 7.32-7.33 7.32Zm4-5.48c-.22-.11-1.3-.64-1.5-.72-.2-.07-.35-.11-.5.11-.14.22-.57.72-.7.87-.13.15-.26.16-.48.06-.22-.11-.94-.35-1.79-1.11-.66-.59-1.1-1.31-1.24-1.53-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.4.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.39-.07-.11-.5-1.2-.68-1.65-.18-.43-.36-.37-.5-.38h-.43c-.15 0-.39.06-.6.28-.2.22-.79.77-.79 1.87s.81 2.17.92 2.32c.11.15 1.6 2.44 3.87 3.42.54.23.96.37 1.29.48.54.17 1.03.15 1.42.09.43-.06 1.3-.53 1.49-1.04.18-.51.18-.94.13-1.03-.05-.1-.2-.15-.42-.26Z"/>
+    </svg>
+  </a>
 
   <footer>
     <p>Cyrca — Cleaning Services</p>
@@ -80,6 +111,6 @@
     <a href="portal/login.html" class="staff-login-link" target="_blank" rel="noopener">Staff Login</a>
   </footer>
 
-  <script src="js/main.js?v=20"></script>
+  <script src="js/main.js?v=21"></script>
 </body>
 </html>
