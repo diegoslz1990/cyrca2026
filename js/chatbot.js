@@ -20,12 +20,57 @@ function closeChatbot() {
   chatbotToggle.classList.remove('hidden');
 }
 
-function addMessage(text, sender) {
+// Fase 4: la conversacion se guarda en este navegador (localStorage), asi
+// no se borra si el visitante recarga la pagina o cambia de pestana.
+const CHATBOT_HISTORY_KEY = 'cyrcaChatHistory';
+const CHATBOT_HISTORY_LIMIT = 30;
+
+function saveHistory(history) {
+  try {
+    localStorage.setItem(CHATBOT_HISTORY_KEY, JSON.stringify(history.slice(-CHATBOT_HISTORY_LIMIT)));
+  } catch (error) {
+    // Si el navegador bloquea localStorage (modo privado, etc.), no pasa nada grave.
+  }
+}
+
+function loadHistory() {
+  try {
+    const raw = localStorage.getItem(CHATBOT_HISTORY_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function renderBubble(text, sender) {
   const bubble = document.createElement('div');
   bubble.className = `chatbot-message chatbot-message-${sender}`;
   bubble.textContent = text;
   chatbotMessages.appendChild(bubble);
   chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+  return bubble;
+}
+
+function addMessage(text, sender) {
+  renderBubble(text, sender);
+  const history = loadHistory();
+  history.push({ text, sender });
+  saveHistory(history);
+}
+
+// Si ya habia una conversacion guardada, la mostramos en vez del saludo
+// por defecto que trae el HTML.
+const savedHistory = loadHistory();
+if (savedHistory.length > 0) {
+  chatbotMessages.innerHTML = '';
+  savedHistory.forEach((entry) => renderBubble(entry.text, entry.sender));
+}
+
+function showTyping() {
+  const bubble = renderBubble('', 'bot');
+  bubble.classList.add('chatbot-typing');
+  bubble.innerHTML = '<span></span><span></span><span></span>';
+  return bubble;
 }
 
 // Quita tildes/acentos y pasa a minusculas, para que "cuánto" y "cuanto"
@@ -121,14 +166,16 @@ function findResponse(userText) {
 
 async function sendMessage(text) {
   addMessage(text, 'user');
+  const typingBubble = showTyping();
 
   if (typeof pricingReady !== 'undefined') {
     await pricingReady; // asegura precios reales, no solo el respaldo
   }
 
   window.setTimeout(() => {
+    typingBubble.remove();
     addMessage(findResponse(text), 'bot');
-  }, 400);
+  }, 700);
 }
 
 if (chatbotToggle && chatbotPanel) {

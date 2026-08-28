@@ -657,6 +657,41 @@ section {
   border-bottom-left-radius: 4px;
 }
 
+.chatbot-typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.7rem 0.9rem;
+}
+
+.chatbot-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-text-light);
+  opacity: 0.5;
+  animation: chatbot-typing-bounce 1.2s infinite ease-in-out;
+}
+
+.chatbot-typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.chatbot-typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes chatbot-typing-bounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
 .chatbot-message-user {
   background-color: var(--color-blue);
   color: var(--color-white);
